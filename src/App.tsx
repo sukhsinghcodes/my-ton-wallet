@@ -1,24 +1,25 @@
 import './App.css';
 import { TonConnectButton } from '@tonconnect/ui-react';
-import { useCounterContract } from './hooks/useCounterContract';
-import { useTonConnect } from './hooks/useTonConnect';
+import { useCounterContract, useTonConnect } from './hooks';
 
 function App() {
   const { value, address, sendIncrement } = useCounterContract();
-  const { connected } = useTonConnect()
+  const { connected } = useTonConnect();
 
   return (
-    <div className='App'>
-      <div className='Container'>
+    <div className="App">
+      <div className="Container">
         <h1>My TON Wallet</h1>
         <TonConnectButton />
 
-        <div className='Card'>
+        <div className="Card">
           <b>Counter Address</b>
-          {address && <div className='Hint'>{`${address.slice(0, 30)}...`}</div>}
+          {address && (
+            <div className="Hint">{`${address.slice(0, 30)}...`}</div>
+          )}
         </div>
 
-        <div className='Card'>
+        <div className="Card">
           <b>Counter Value</b>
           <div>{value ?? 'Loading...'}</div>
         </div>
@@ -36,4 +37,4 @@ function App() {
   );
 }
 
-export default App
+export default App;

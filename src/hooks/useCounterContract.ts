@@ -12,12 +12,14 @@ function sleep(ms: number) {
 export function useCounterContract() {
   const client = useTonClient();
   const [val, setVal] = useState<null | string>();
-  const { sender } = useTonConnect()
+  const { sender } = useTonConnect();
 
-  const counterContract = useAsyncInitialise((): OpenedContract<Counter> | undefined => {
+  const counterContract = useAsyncInitialise(():
+    | OpenedContract<Counter>
+    | undefined => {
     if (!client) return;
     const contract = new Counter(
-      Address.parse('EQAs_FnCP8sD-KRM88VmK6j80lLGQUSKYoU0M_-ecZ6Pvt3C') // counter contract address
+      Address.parse('EQAs_FnCP8sD-KRM88VmK6j80lLGQUSKYoU0M_-ecZ6Pvt3C'), // counter contract address
     );
     return client.open(contract);
   }, [client]);
@@ -28,8 +30,8 @@ export function useCounterContract() {
       setVal(null);
       const val = await counterContract.getCounter();
       setVal(val.toString());
-      await sleep(5000)
-      void getValue()
+      await sleep(5000);
+      void getValue();
     }
     void getValue();
   }, [counterContract]);
@@ -38,7 +40,7 @@ export function useCounterContract() {
     value: val,
     address: counterContract?.address.toString(),
     sendIncrement: () => {
-      return counterContract?.sendIncrement(sender)
-    }
+      return counterContract?.sendIncrement(sender);
+    },
   };
 }
