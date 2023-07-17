@@ -1,3 +1,4 @@
+import '@twa-dev/sdk';
 import './App.css';
 import { TonConnectButton } from '@tonconnect/ui-react';
 import { useCounterContract, useTonConnect } from './hooks';
